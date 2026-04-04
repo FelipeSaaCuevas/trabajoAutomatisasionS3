@@ -1,8 +1,5 @@
-
-
 <?php
-
-$token = 8622462644:AAGruvVjt8lY3Bo6okpUwUiAKkM1CZ65RUY; 
+$token = "8622462644:AAGruvVjt8lY3Bo6okpUwUiAKkM1CZ65RUY";
 $apiURL = "https://api.telegram.org/bot$token/";
 
 $content = file_get_contents('php://input');
@@ -32,7 +29,7 @@ if (isset($update['message'])) {
         'detergente' => 5,
         'lavaloza' => 5
     ];
-
+    
     if ($message_text == '/start') {
         $response = "¡Bienvenido al bot del Supermercado! 🛒\n\n";
         $response .= "Envía el nombre de un producto y te diré en qué pasillo encontrarlo.\n\n";
@@ -50,7 +47,6 @@ if (isset($update['message'])) {
         $response .= "/productos - Ver lista de productos\n\n";
         $response .= "O simplemente escribe el nombre de un producto.";
     }
-    // Comando /productos
     elseif ($message_text == '/productos') {
         $response = "📦 Lista de productos por pasillo:\n\n";
         $response .= "Pasillo 1: Carne, Queso, Jamón\n";
@@ -59,7 +55,7 @@ if (isset($update['message'])) {
         $response .= "Pasillo 4: Pan, Pasteles, Tortas\n";
         $response .= "Pasillo 5: Detergente, Lavaloza";
     }
-else {
+    else {
         $producto_buscado = strtolower($message_text);
         
         if (isset($productos[$producto_buscado])) {
@@ -70,7 +66,7 @@ else {
             $response .= "Escribe /productos para ver la lista de productos disponibles.";
         }
     }
- 
+    
     sendMessage($chat_id, $response);
 }
 
