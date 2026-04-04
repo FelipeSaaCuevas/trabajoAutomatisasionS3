@@ -1,20 +1,17 @@
 
 
 <?php
-// Configuración del bot de Telegram
-$token = 'TU_TOKEN_DE_TELEGRAM'; // Reemplaza con el token de tu bot
+
+$token = 8622462644:AAGruvVjt8lY3Bo6okpUwUiAKkM1CZ65RUY; 
 $apiURL = "https://api.telegram.org/bot$token/";
 
-// Leer la entrada de Telegram
 $content = file_get_contents('php://input');
 $update = json_decode($content, true);
 
-// Verificar si hay un mensaje
 if (isset($update['message'])) {
     $chat_id = $update['message']['chat']['id'];
     $message_text = trim($update['message']['text']);
     
-    // Definir los productos y sus pasillos
     $productos = [
         'carne' => 1,
         'queso' => 1,
@@ -35,8 +32,7 @@ if (isset($update['message'])) {
         'detergente' => 5,
         'lavaloza' => 5
     ];
-    
-    // Comando /start
+
     if ($message_text == '/start') {
         $response = "¡Bienvenido al bot del Supermercado! 🛒\n\n";
         $response .= "Envía el nombre de un producto y te diré en qué pasillo encontrarlo.\n\n";
@@ -47,7 +43,6 @@ if (isset($update['message'])) {
         $response .= "Pasillo 4: Pan, Pasteles, Tortas\n";
         $response .= "Pasillo 5: Detergente, Lavaloza";
     } 
-    // Comando /ayuda
     elseif ($message_text == '/ayuda') {
         $response = "📋 Comandos disponibles:\n";
         $response .= "/start - Iniciar el bot\n";
@@ -64,8 +59,7 @@ if (isset($update['message'])) {
         $response .= "Pasillo 4: Pan, Pasteles, Tortas\n";
         $response .= "Pasillo 5: Detergente, Lavaloza";
     }
-    else {
-        // Buscar el producto en el array
+else {
         $producto_buscado = strtolower($message_text);
         
         if (isset($productos[$producto_buscado])) {
@@ -76,12 +70,10 @@ if (isset($update['message'])) {
             $response .= "Escribe /productos para ver la lista de productos disponibles.";
         }
     }
-    
-    // Enviar la respuesta
+ 
     sendMessage($chat_id, $response);
 }
 
-// Función para enviar mensajes
 function sendMessage($chat_id, $message) {
     global $apiURL;
     $url = $apiURL . "sendMessage?chat_id=" . $chat_id . "&text=" . urlencode($message) . "&parse_mode=Markdown";
