@@ -41,14 +41,14 @@ if (isset($update['message'])) {
         $response .= "Pasillo 5: Detergente, Lavaloza";
     } 
     elseif ($message_text == '/ayuda') {
-        $response = "📋 Comandos disponibles:\n";
+        $response = "Comandos disponibles:\n";
         $response .= "/start - Iniciar el bot\n";
         $response .= "/ayuda - Mostrar esta ayuda\n";
         $response .= "/productos - Ver lista de productos\n\n";
         $response .= "O simplemente escribe el nombre de un producto.";
     }
     elseif ($message_text == '/productos') {
-        $response = "📦 Lista de productos por pasillo:\n\n";
+        $response = "Lista de productos por pasillo:\n\n";
         $response .= "Pasillo 1: Carne, Queso, Jamón\n";
         $response .= "Pasillo 2: Leche, Yogurth, Cereal\n";
         $response .= "Pasillo 3: Bebidas, Jugos\n";
@@ -60,9 +60,9 @@ if (isset($update['message'])) {
         
         if (isset($productos[$producto_buscado])) {
             $pasillo = $productos[$producto_buscado];
-            $response = "✅ El producto *" . ucfirst($message_text) . "* se encuentra en el *Pasillo $pasillo*.";
+            $response = "El producto *" . ucfirst($message_text) . "* se encuentra en el *Pasillo $pasillo*.";
         } else {
-            $response = "❌ Lo siento, no encontré el producto \"$message_text\".\n\n";
+            $response = "Lo siento, no encontré el producto \"$message_text\".\n\n";
             $response .= "Escribe /productos para ver la lista de productos disponibles.";
         }
     }
